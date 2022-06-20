@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GamerGuides</string>
+    <string name="lorem_ipsum_dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat nisi id
+        scelerisque convallis. Ut sagittis, leo nec posuere luctus, velit nisi ultrices nunc, sit amet vehicula lacus
+        orci et mauris. Nunc non massa scelerisque, finibus odio eu, sagittis nisi.
+    </string>
+</resources>
