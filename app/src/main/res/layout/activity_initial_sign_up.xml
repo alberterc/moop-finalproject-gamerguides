@@ -57,6 +57,7 @@
 
         <android.widget.Button
                 android:id="@+id/create_account_button"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/main_button_background"
                 android:text="Create Account"
                 android:textAllCaps="false"

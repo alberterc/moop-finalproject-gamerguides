@@ -57,6 +57,7 @@
 
         <android.widget.Button
                 android:id="@+id/getstarted_button"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/main_button_background"
                 android:text="Get Started"
                 android:textAllCaps="false"
