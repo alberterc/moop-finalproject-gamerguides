@@ -10,8 +10,8 @@
               android:label="fragment_user_courses" tools:layout="@layout/fragment_user_courses"/>
     <fragment android:id="@+id/add_course_fragment" android:name="com.moop.gamerguides.mainfragments.AddNewCourse"
               android:label="fragment_add_new_course" tools:layout="@layout/fragment_add_new_course"/>
-    <fragment android:id="@+id/user_wishlist_fragment" android:name="com.moop.gamerguides.mainfragments.UserWishlist"
-              android:label="fragment_user_wishlist" tools:layout="@layout/fragment_user_wishlist"/>
+    <fragment android:id="@+id/user_wishlist_fragment" android:name="com.moop.gamerguides.mainfragments.UserFavorites"
+              android:label="fragment_user_wishlist" tools:layout="@layout/fragment_user_favorite"/>
     <fragment android:id="@+id/user_profile_fragment" android:name="com.moop.gamerguides.mainfragments.UserProfile"
               android:label="fragment_user_profile" tools:layout="@layout/fragment_user_profile"/>
 </navigation>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/main_background"
+             tools:context=".mainfragments.UserFavorites">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/page_title"
+                android:text="Daftar Keinginan"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="20sp"
+                android:textColor="@color/main_textcolor"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                android:layout_alignTop="@id/page_title"
+                android:layout_marginTop="70dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <RelativeLayout
+                    android:id="@+id/empty_container"
+                    android:layout_alignTop="@id/page_title"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp">
+
+                <ImageView
+                        android:id="@+id/image_empty"
+                        android:src="@drawable/favorite_background"
+                        android:layout_width="190dp"
+                        android:layout_height="190dp"
+                        android:layout_centerHorizontal="true"
+                />
+
+                <TextView
+                        android:id="@+id/text_empty"
+                        android:text="Daftar keinginan anda akan disimpan di sini."
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#70FFFFFF"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="210dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/wishlist_list"
+                    android:layout_alignTop="@id/page_title"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

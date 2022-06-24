@@ -24,4 +24,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="tambahkan_button">Tambahkan</string>
     <string name="akun_title">Akun</string>
+    <string name="edit_kursus_title">Edit Kursus</string>
 </resources>

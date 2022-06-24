@@ -1,5 +1,6 @@
 package com.moop.gamerguides
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -7,10 +8,26 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.moop.gamerguides.login.SignUp
 
 
-class MainActivity : AppCompatActivity() {
+class MainMenu : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // initialize Firebase auth
+        firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
+
+        if (user == null) {
+            // go to SignUp activity
+            startActivity(Intent(applicationContext, SignUp::class.java))
+            finish()
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
