@@ -4,4 +4,24 @@
         scelerisque convallis. Ut sagittis, leo nec posuere luctus, velit nisi ultrices nunc, sit amet vehicula lacus
         orci et mauris. Nunc non massa scelerisque, finibus odio eu, sagittis nisi.
     </string>
+    <string name="pilihan_game_title">Pilihan Game</string>
+    <string name="kursus_saya_title">Kursus Saya</string>
+    <string name="tambahkan_kursus_title">Tambahkan Kursus</string>
+    <string name="nama_kursus_form_title">Nama Kursus</string>
+    <string name="thumbnail_form_title">Thumbnail</string>
+    <string name="deskripsi_kursus_form_title">Deskripsi Kursus</string>
+    <string name="kategori_games_form_title">Kategori Games</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sample">SAMPLE</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="tambahkan_button">Tambahkan</string>
+    <string name="akun_title">Akun</string>
 </resources>

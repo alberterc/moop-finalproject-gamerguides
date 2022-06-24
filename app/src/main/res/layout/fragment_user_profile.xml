@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:background="@color/main_background"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".mainfragments.UserProfile">
+
+    <ScrollView
+            android:id="@+id/page_scroller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/page_title"
+                    android:text="@string/akun_title"
+                    android:fontFamily="@font/roboto_slab"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/main_textcolor"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+
+            <RelativeLayout
+                    android:id="@+id/account_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/page_title"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_profile_picture"
+                        android:src="@drawable/ic_baseline_account_circle_24"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:layout_centerHorizontal="true"
+                />
+
+                <TextView
+                        android:id="@+id/user_display_name"
+                        android:text="Display Name"
+                        android:textColor="@color/white"
+                        android:textSize="21sp"
+                        android:fontFamily="@font/roboto"
+                        android:layout_alignTop="@id/user_profile_picture"
+                        android:layout_marginTop="137dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                />
+
+                <RelativeLayout
+                        android:id="@+id/user_email_container"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignTop="@id/user_display_name"
+                        android:layout_marginTop="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <ImageView
+                            android:id="@+id/user_email_image"
+                            android:src="@drawable/ic_baseline_email_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                    />
+
+                    <TextView
+                            android:id="@+id/user_email_text"
+                            android:text="example@email.com"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/roboto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@id/user_email_image"
+                            android:layout_marginStart="40dp"
+                            android:layout_centerVertical="true"
+                    />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:id="@+id/account_settings_button_container"
+                        android:layout_alignTop="@id/user_email_container"
+                        android:layout_marginTop="60dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:id="@+id/account_settings_text"
+                            android:text="Pengaturan Akun"
+                            android:textSize="20sp"
+                            android:textColor="@color/main_textcolor"
+                            android:fontFamily="@font/roboto"
+                            android:layout_alignParentStart="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                    />
+
+                    <ImageView
+                            android:id="@+id/account_settings_arrow"
+                            android:src="@drawable/ic_baseline_navigate_next_24"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                    />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:id="@+id/help_and_support_button_container"
+                        android:layout_alignTop="@id/account_settings_button_container"
+                        android:layout_marginTop="50dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:id="@+id/help_and_support_text"
+                            android:text="Bantuan dan Dukungan"
+                            android:textSize="20sp"
+                            android:textColor="@color/main_textcolor"
+                            android:fontFamily="@font/roboto"
+                            android:layout_alignParentStart="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                    />
+
+                    <ImageView
+                            android:id="@+id/help_and_support_arrow"
+                            android:src="@drawable/ic_baseline_navigate_next_24"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                    />
+
+                </RelativeLayout>
+
+                <android.widget.Button
+                        android:id="@+id/logout_button"
+                        android:text="Logout"
+                        android:textSize="18sp"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/roboto"
+                        android:background="@drawable/main_button_background"
+                        android:paddingStart="52dp"
+                        android:paddingEnd="52dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/help_and_support_button_container"
+                        android:layout_marginTop="150dp"
+                        android:layout_centerHorizontal="true"
+                />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

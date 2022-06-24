@@ -1,4 +1,4 @@
-package com.moop.gamerguides
+package com.moop.gamerguides.helper
 
 
 import android.content.ContentValues
