@@ -50,11 +50,17 @@ dependencies {
     // circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-/*    // Import the BoM for the Firebase platform
+    // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
-    // Firebase database
+    // Firebase realtime database
     implementation 'com.google.firebase:firebase-database-ktx'
     // Firebase auth login
-    implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
-    implementation 'com.google.firebase:firebase-auth-ktx'*/
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    // Firebase storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    // picasso for image loading from url
+    implementation 'com.squareup.picasso:picasso:2.8'
 }
+
+apply plugin: 'com.google.gms.google-services'

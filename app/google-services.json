@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "556993531115",
+    "firebase_url": "https://moop-group-finalproj-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "moop-group-finalproj",
+    "storage_bucket": "moop-group-finalproj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556993531115:android:cf3a4b78b0c88af29c42ae",
+        "android_client_info": {
+          "package_name": "com.moop.gamerguides"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556993531115-dtv4dfmsnn76kjm46v0oj3d5recbof71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moop.gamerguides",
+            "certificate_hash": "4d29f5abf945b80c488bd1e524253b0f8647c414"
+          }
+        },
+        {
+          "client_id": "556993531115-nc1n9kur4l02neoju5f71reau6hr91mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9fNMyFwG5cRy2d45c6zhxfuncKAWjFTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556993531115-nc1n9kur4l02neoju5f71reau6hr91mh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

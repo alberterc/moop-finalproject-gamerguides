@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GamerGuides" >
         <activity
+            android:name=".userprofile.AccountSettings"
+            android:exported="true" />
+        <activity
+            android:name=".EditCourse"
+            android:exported="true" />
+        <activity
             android:name=".getstarted.InitialSignUp"
             android:exported="true" />
         <activity
@@ -17,20 +23,23 @@
             android:exported="true" />
         <activity
             android:name=".login.SignUp"
-            android:exported="true" />
-        <activity
-            android:name=".login.SignIn"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/>
+        <activity
+            android:name=".login.SignIn"
+            android:exported="true" />
+        <activity
+            android:name=".MainMenu"
+            android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
