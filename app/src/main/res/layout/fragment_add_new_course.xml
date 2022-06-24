@@ -19,8 +19,7 @@
             <TextView
                     android:id="@+id/page_title"
                     android:text="@string/tambahkan_kursus_title"
-                    android:fontFamily="@font/roboto_slab"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:textSize="24sp"
                     android:textColor="@color/main_textcolor"
                     android:layout_alignParentTop="true"
@@ -42,8 +41,7 @@
                 <TextView
                         android:id="@+id/course_title"
                         android:text="@string/nama_kursus_form_title"
-                        android:fontFamily="@font/roboto_slab"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"
                         android:textSize="16sp"
                         android:textColor="@color/main_textcolor"
                         android:layout_alignParentTop="true"
@@ -54,7 +52,7 @@
                 <EditText
                         android:id="@+id/course_title_input"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_slab"
+                        android:fontFamily="@font/montserrat_regular"
                         android:textSize="16sp"
                         android:background="@drawable/text_input_background"
                         android:layout_alignTop="@id/course_title"
@@ -66,8 +64,7 @@
                 <TextView
                         android:id="@+id/course_thumbnail"
                         android:text="@string/thumbnail_form_title"
-                        android:fontFamily="@font/roboto_slab"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"
                         android:textSize="16sp"
                         android:textColor="@color/main_textcolor"
                         android:layout_alignTop="@id/course_title_input"
@@ -96,8 +93,7 @@
                 <TextView
                         android:id="@+id/course_description"
                         android:text="@string/deskripsi_kursus_form_title"
-                        android:fontFamily="@font/roboto_slab"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"
                         android:textSize="16sp"
                         android:textColor="@color/main_textcolor"
                         android:layout_alignTop="@id/course_thumbnail_input"
@@ -109,7 +105,7 @@
                 <EditText
                         android:id="@+id/course_description_input"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_slab"
+                        android:fontFamily="@font/montserrat_regular"
                         android:textSize="16sp"
                         android:background="@drawable/text_input_background"
                         android:layout_alignTop="@id/course_description"
@@ -121,8 +117,7 @@
                 <TextView
                         android:id="@+id/course_game_category"
                         android:text="@string/kategori_games_form_title"
-                        android:fontFamily="@font/roboto_slab"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"
                         android:textSize="16sp"
                         android:textColor="@color/main_textcolor"
                         android:layout_alignTop="@id/course_description_input"
@@ -134,7 +129,7 @@
                 <Spinner
                         android:id="@+id/course_game_category_input"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/roboto_slab"
+                        android:fontFamily="@font/montserrat_regular"
                         android:textSize="16sp"
                         android:background="@drawable/text_input_background"
                         android:layout_marginBottom="40dp"
@@ -148,9 +143,9 @@
                         android:id="@+id/add_course_button"
                         android:text="@string/tambahkan_button"
                         android:textAllCaps="false"
-                        android:fontFamily="@font/roboto_slab"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="38dp"
                         android:layout_alignTop="@id/course_game_category_input"
