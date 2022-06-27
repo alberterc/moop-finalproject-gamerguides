@@ -1,5 +1,6 @@
 package com.moop.gamerguides.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.moop.gamerguides.R
 class SignIn : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         // initialize Firebase auth
         firebaseAuth = Firebase.auth
@@ -72,7 +74,7 @@ class SignIn : AppCompatActivity() {
                         }
                         else {
                             try {
-                                val noUserFoundException: FirebaseAuthInvalidUserException = task.exception as FirebaseAuthInvalidUserException
+                                task.exception as FirebaseAuthInvalidUserException
                                 Toast.makeText(this, "Account not found.", Toast.LENGTH_SHORT)
                                     .show()
                             } catch (e: Exception) {
@@ -98,6 +100,7 @@ class SignIn : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun signInAccountFirebase(email: String, password: String) {
         val emailInput: EditText = findViewById(R.id.email_input)
         val passwordInput: EditText = findViewById(R.id.password_input)
