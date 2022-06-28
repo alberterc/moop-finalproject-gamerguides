@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
         <!--change status bar color-->
         <item name="android:statusBarColor" tools:targetApi="lollipop" tools:ignore="DuplicateDefinition">#182940</item>
     </style>
@@ -23,5 +24,9 @@
     <style name="Theme.GamerGuides.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+    <style name="roundedImageBorder">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
     </style>
 </resources>
