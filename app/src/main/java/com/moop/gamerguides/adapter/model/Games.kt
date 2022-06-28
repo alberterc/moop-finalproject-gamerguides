@@ -5,4 +5,5 @@ class Games {
 
     var title: String? = ""
     var id: String? = ""
+    var image: String? = ""
 }
