@@ -32,4 +32,7 @@
     <style name="spinnerBackground" parent="Widget.AppCompat.Spinner">
         <item name="android:popupBackground">@drawable/user_text_input_background</item>
     </style>
+    <style name="SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splashscreen_background</item>
+    </style>
 </resources>
