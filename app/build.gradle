@@ -58,6 +58,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     // Firebase storage
     implementation 'com.google.firebase:firebase-storage-ktx'
+    // Firebase UI
+    implementation 'com.firebaseui:firebase-ui:8.0.1'
 
     // picasso for image loading from url
     implementation 'com.squareup.picasso:picasso:2.8'
