@@ -1,10 +1,10 @@
 package com.moop.gamerguides.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +26,7 @@ class SignUp : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var firebaseStorage: FirebaseStorage
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         // initialize Firebase auth
         firebaseAuth = Firebase.auth
@@ -94,6 +95,7 @@ class SignUp : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun createAccountFirebase(username: String, email: String, password: String) {
         val emailInput: EditText = findViewById(R.id.email_input)
         val passwordInput: EditText = findViewById(R.id.password_input)
