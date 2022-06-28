@@ -1,24 +1,186 @@
+@file:Suppress("DEPRECATION")
+
 package com.moop.gamerguides.mainfragments
 
+import android.app.Activity.RESULT_OK
+import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
+import com.firebase.ui.database.FirebaseListAdapter
+import com.firebase.ui.database.FirebaseListOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Course
+import com.moop.gamerguides.adapter.model.Games
+import com.moop.gamerguides.helper.FirebaseUtil
+import java.io.IOException
+
 
 class AddNewCourse : Fragment() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var firebaseStorage: FirebaseStorage
+    private lateinit var firebaseListAdapter: FirebaseListAdapter<Games>
+    private lateinit var courseImagePath: Uri
+    private lateinit var selectedGameCategory: String
+    private lateinit var courseImagePathString: String
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_courses, container, false)
+        return inflater.inflate(R.layout.fragment_add_new_course, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // initialize Firebase auth
+        firebaseAuth = Firebase.auth
+        // initialize Firebase Database
+        firebaseDatabase = Firebase.database(FirebaseUtil.firebaseDatabaseURL)
+        // initialize Firebase Storage
+        firebaseStorage = Firebase.storage(FirebaseUtil.firebaseStorageURL)
+
+        // get course data from user input
+        val courseTitle: EditText = view.findViewById(R.id.course_title_input)
+        val courseThumbnail: RelativeLayout = view.findViewById(R.id.course_thumbnail_input)
+        val courseDescription: EditText = view.findViewById(R.id.course_description_input)
+        val gameCategoryDropdown: Spinner = view.findViewById(R.id.course_game_category_input)
+        val addCourseButton: Button = view.findViewById(R.id.add_course_button)
+
+        // set spinner list with firebase database data
+        // set options for adapter
+        val options = FirebaseListOptions.Builder<Games>()
+            .setQuery(firebaseDatabase.reference.child("games"), Games::class.java)
+            .setLayout(android.R.layout.simple_spinner_dropdown_item)
+            .build()
+        // set adapter from firebase data
+        firebaseListAdapter = object : FirebaseListAdapter<Games>(options) {
+            override fun populateView(v: View, model: Games, position: Int) {
+                val gameTitle: TextView = v.findViewById(android.R.id.text1)
+                gameTitle.text = model.title
+            }
+        }
+        gameCategoryDropdown.adapter = firebaseListAdapter
+
+
+        //        // static data for spinner
+//        val games = arrayOf("Valorant", "Mobile Legends")
+//        val adapter: ArrayAdapter<String> = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, games)
+
+        // course thumbnail input onclick function
+        // open gallery for user to upload course thumbnail
+        courseThumbnail.setOnClickListener {
+            // choose course thumbnail
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            // requestCode == 100 for profile picture image gallery upload
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), 100)
+        }
+
+        // get game category from spinner
+        gameCategoryDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                val courseTitleView: TextView = adapterView.findViewById(android.R.id.text1)
+                selectedGameCategory = courseTitleView.text.toString()
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+        // add course button onclick function
+        // send data to firebase database
+        addCourseButton.setOnClickListener {
+            // upload all course data to firebase
+            uploadDataToFirebase(courseImagePath, courseTitle.text.toString(), courseDescription.text.toString())
+        }
+
+    }
+
+    private fun uploadDataToFirebase(imagePath: Uri, courseTitleText: String, courseDescriptionText: String) {
+        val progressDialog = ProgressDialog(context)
+        progressDialog.setTitle("Uploading Picture")
+        progressDialog.show()
+
+        // upload course image to firebase storage
+        firebaseStorage.reference
+            .child("courses")
+            .child("image")
+            .child("course_image")
+            .putFile(imagePath)
+            // if course image upload failed
+            .addOnFailureListener {
+                progressDialog.dismiss()
+                Toast.makeText(context, "Failed to add course", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            // if course image upload succeed
+            .addOnCompleteListener {
+
+                progressDialog.dismiss()
+
+                // get course image path with string data type from firebase storage
+                firebaseStorage.reference
+                    .child("courses")
+                    .child("image")
+                    .child("course_image")
+                    .downloadUrl
+                    .addOnSuccessListener {
+
+                        // send course data to firebase database
+                        firebaseDatabase.reference
+                            .child("courses")
+                            .push()
+                            .setValue(
+                                Course(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid)
+                            )
+                    }
+            }
+
+            // upload progress number for ProgressDialog
+            .addOnProgressListener {
+                val uploadProgress: Double = (100.0 * it.bytesTransferred / it.totalByteCount)
+                progressDialog.setMessage("Uploaded: ${uploadProgress.toInt()}%")
+            }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // requestCode == 100 for profile picture image gallery upload
+        if (resultCode == RESULT_OK && requestCode == 100 && data != null && data.data != null) {
+            val fileImagePath = data.data!!
+            try {
+                courseImagePath = fileImagePath
+                // show chosen course thumbnail
+                val courseThumbnailResult: ImageView = view!!.findViewById(R.id.course_thumbnail_result)
+                courseThumbnailResult.setImageURI(courseImagePath)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        firebaseListAdapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        firebaseListAdapter.stopListening()
     }
 
 }
