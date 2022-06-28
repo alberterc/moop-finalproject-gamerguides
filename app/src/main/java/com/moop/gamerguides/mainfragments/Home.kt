@@ -16,7 +16,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.R
-import com.moop.gamerguides.adapter.model.GameAdapter
+import com.moop.gamerguides.adapter.GameAdapter
 import com.moop.gamerguides.adapter.model.Games
 import com.moop.gamerguides.helper.FirebaseUtil
 
