@@ -7,7 +7,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,10 +30,6 @@ import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.adapter.model.Games
 import com.moop.gamerguides.helper.FirebaseUtil
 import com.moop.gamerguides.helper.ListToMutableList
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.io.IOException
 
 
