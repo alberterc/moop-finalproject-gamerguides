@@ -42,6 +42,8 @@ class Home : Fragment() {
         // initialize Firebase Storage
         firebaseStorage = Firebase.storage(FirebaseUtil.firebaseStorageURL)
 
+
+        // set recyclerview layout manager
         val gameList: RecyclerView = view.findViewById(R.id.game_list)
         gameList.layoutManager = GridLayoutManager(context, 2)
 
