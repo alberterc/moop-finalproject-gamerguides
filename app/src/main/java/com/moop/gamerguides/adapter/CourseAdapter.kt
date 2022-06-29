@@ -82,16 +82,10 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
             // edit course button onclick function
             holder.courseEditButton.setOnClickListener {
                 val intent = Intent(holder.courseEditButton.context, EditCourse::class.java)
-                firebaseDatabase.reference
-                    .child("courses")
-                    .child(model.id!!)
-                    .get()
-                    .addOnSuccessListener {
-                        // get course id for intent
-                        intent.putExtra("courseID", model.id)
-                        // go to edit course activity with the course id
-                        holder.courseEditButton.context.startActivity(intent)
-                    }
+                // get course id for intent
+                intent.putExtra("courseID", model.id)
+                // go to edit course activity with the course id
+                holder.courseEditButton.context.startActivity(intent)
             }
 
             // add video button onclick function
