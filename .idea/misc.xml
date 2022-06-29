@@ -19,6 +19,7 @@
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.3270042194092827" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_add_photo_alternate_24.xml" value="0.252442996742671" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_arrow_drop_down_circle_24.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.252442996742671" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.20098684210526316" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.3270042194092827" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.3270042194092827" />
@@ -37,7 +38,7 @@
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_edit_course.xml" value="0.1819078947368421" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_get_started.xml" value="0.25" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
-        <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_initial_sign_up.xml" value="0.30641025641025643" />
+        <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_initial_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
@@ -48,9 +49,11 @@
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/fragment_add_new_course.xml" value="0.25" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/fragment_home.xml" value="0.24473684210526317" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/fragment_user_courses.xml" value="0.22" />
+        <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/fragment_user_favorite.xml" value="0.24473684210526317" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/fragment_user_profile.xml" value="0.22" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/fragment_user_wishlist.xml" value="0.2" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/item_game.xml" value="0.24407894736842106" />
+        <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/layout/item_user_course.xml" value="0.25" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2514657980456026" />
         <entry key="..\:/Users/RadX/Documents/Univ/Semester 4/Mobile Object Oriented Programming/Kelompok/code/GamerGuides/app/src/main/res/menu/btmnavbar_menu.xml" value="0.2532894736842105" />
       </map>

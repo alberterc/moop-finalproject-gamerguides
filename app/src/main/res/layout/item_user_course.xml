@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="#2C293E"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+    <RelativeLayout
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/course_image"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                app:shapeAppearanceOverlay="@style/roundedImageBorder"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="110dp"
+                android:layout_height="70dp"
+        />
+
+        <TextView
+                android:id="@+id/course_title"
+                android:text="Course Title"
+                android:textSize="16sp"
+                android:textColor="@color/main_textcolor"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_toEndOf="@id/course_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+        />
+
+        <TextView
+                android:id="@+id/course_count_title"
+                android:text="Video: "
+                android:textSize="12sp"
+                android:textColor="@color/main_textcolor"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_below="@id/course_title"
+                android:layout_toEndOf="@id/course_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+        />
+
+        <TextView
+                android:id="@+id/course_count"
+                android:text="0"
+                android:textSize="12sp"
+                android:textColor="@color/main_textcolor"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_below="@id/course_title"
+                android:layout_toEndOf="@id/course_count_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+
+        <android.widget.Button
+                android:id="@+id/edit_course_button"
+                android:layout_width="70dp"
+                android:layout_height="27dp"
+                android:text="Edit"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_regular"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@drawable/main_button_background"
+                android:layout_below="@id/course_count_title"
+                android:layout_toEndOf="@id/course_image"
+        />
+        <android.widget.Button
+                android:id="@+id/add_video_button"
+                android:layout_width="70dp"
+                android:layout_height="27dp"
+                android:text="Video"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_regular"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@drawable/main_button_background"
+                android:layout_below="@id/course_count_title"
+                android:layout_toEndOf="@id/edit_course_button"
+                android:layout_marginStart="10dp"
+        />
+
+        <ImageView
+                android:id="@+id/delete_course_button"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

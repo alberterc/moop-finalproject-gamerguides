@@ -13,10 +13,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -51,9 +48,14 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
         // check if course in database is made by user
         if (model.uid == firebaseAuth.currentUser!!.uid) {
             // get course image from firebase database
-            Picasso.get()
-                .load(model.image)
-                .into(holder.courseImage)
+            if (model.image != "") {
+                Picasso.get()
+                    .load(model.image)
+                    .into(holder.courseImage)
+            }
+            else {
+                holder.courseImage.setImageResource(R.drawable.gamerguides_logo)
+            }
 
             // get course title from firebase database
             holder.courseTitle.text = model.title
