@@ -13,8 +13,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.GameAdapter
 import com.moop.gamerguides.adapter.model.Games
@@ -24,7 +22,6 @@ import com.moop.gamerguides.helper.FirebaseUtil
 class Home : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var firebaseStorage: FirebaseStorage
     private lateinit var adapter: GameAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,9 +36,6 @@ class Home : Fragment() {
         firebaseAuth = Firebase.auth
         // initialize Firebase Database
         firebaseDatabase = Firebase.database(FirebaseUtil.firebaseDatabaseURL)
-        // initialize Firebase Storage
-        firebaseStorage = Firebase.storage(FirebaseUtil.firebaseStorageURL)
-
 
         // set recyclerview layout manager
         val gameList: RecyclerView = view.findViewById(R.id.game_list)
