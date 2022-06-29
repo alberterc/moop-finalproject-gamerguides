@@ -8,8 +8,7 @@
     <RelativeLayout
                 android:background="@color/main_background"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".HomePage">
+                android:layout_height="match_parent">
 
         <TextView
                 android:id="@+id/page_title"
