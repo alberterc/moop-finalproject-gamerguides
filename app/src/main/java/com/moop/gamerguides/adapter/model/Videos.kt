@@ -1,6 +1,6 @@
 package com.moop.gamerguides.adapter.model
 
-class Video {
+class Videos {
     var id: String = ""
     var uid: String? = ""
     var title: String = ""
