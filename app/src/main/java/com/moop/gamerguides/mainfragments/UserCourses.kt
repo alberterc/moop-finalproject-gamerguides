@@ -1,13 +1,11 @@
 package com.moop.gamerguides.mainfragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -16,17 +14,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.CourseAdapter
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.WrapContentLinearLayoutManager
 
 class UserCourses : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var firebaseStorage: FirebaseStorage
     private lateinit var adapter: CourseAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,15 +37,13 @@ class UserCourses : Fragment() {
         firebaseAuth = Firebase.auth
         // initialize Firebase Database
         firebaseDatabase = Firebase.database(FirebaseUtil.firebaseDatabaseURL)
-        // initialize Firebase Storage
-        firebaseStorage = Firebase.storage(FirebaseUtil.firebaseStorageURL)
 
         val emptyContainer: RelativeLayout = view.findViewById(R.id.empty_container)
         var userCourseCount: Int
 
         // set recyclerview layout manager
         val courseList: RecyclerView = view.findViewById(R.id.course_list)
-        courseList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        courseList.layoutManager = WrapContentLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         // set adapter options
         val options = FirebaseRecyclerOptions.Builder<Courses>()
