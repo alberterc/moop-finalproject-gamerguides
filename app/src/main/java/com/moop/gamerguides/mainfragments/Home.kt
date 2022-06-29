@@ -17,6 +17,7 @@ import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.GameAdapter
 import com.moop.gamerguides.adapter.model.Games
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.WrapContentGridLayoutManager
 
 
 class Home : Fragment() {
@@ -39,7 +40,7 @@ class Home : Fragment() {
 
         // set recyclerview layout manager
         val gameList: RecyclerView = view.findViewById(R.id.game_list)
-        gameList.layoutManager = GridLayoutManager(context, 2)
+        gameList.layoutManager = WrapContentGridLayoutManager(context, 2)
 
         // set adapter options
         val options = FirebaseRecyclerOptions.Builder<Games>()
