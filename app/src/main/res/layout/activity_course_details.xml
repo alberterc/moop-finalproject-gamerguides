@@ -140,6 +140,7 @@
             android:textColor="@color/main_textcolor"
             android:textSize="18sp"
             android:fontFamily="@font/montserrat_regular"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_below="@id/user_profile_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
