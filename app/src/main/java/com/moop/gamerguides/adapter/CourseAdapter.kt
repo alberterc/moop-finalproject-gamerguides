@@ -1,6 +1,7 @@
 package com.moop.gamerguides.adapter
 
-import android.content.Context
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -18,11 +19,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.EditCourse
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.ListToMutableList
 import com.squareup.picasso.Picasso
+
 
 class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecyclerAdapter<Courses, CourseAdapter.CourseViewHolder>(
     options) {
@@ -46,6 +51,8 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
         val firebaseAuth: FirebaseAuth = Firebase.auth
         // initialize Firebase Database
         val firebaseDatabase: FirebaseDatabase = Firebase.database(FirebaseUtil.firebaseDatabaseURL)
+        // initialize Firebase Storage
+        val firebaseStorage: FirebaseStorage = Firebase.storage(FirebaseUtil.firebaseStorageURL)
 
         // check if course in database is made by user
         if (model.uid == firebaseAuth.currentUser!!.uid) {
@@ -96,8 +103,62 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
 
             // delete course button onclick function
             holder.courseDeleteButton.setOnClickListener {
-                Toast.makeText(holder.courseEditButton.context, "Delete Course", Toast.LENGTH_SHORT)
-                    .show()
+                // make alert dialog box (Yes/No) listener
+                val dialogClickListener =
+                    DialogInterface.OnClickListener { _, which ->
+                        when (which) {
+                            DialogInterface.BUTTON_POSITIVE -> {
+                                // delete course from user database
+                                var userCourseList: List<String> = emptyList()
+                                var removedCourseList: List<String?>
+                                firebaseDatabase.reference
+                                    .child("users")
+                                    .child(model.uid!!)
+                                    .child("courses")
+                                    .addListenerForSingleValueEvent(object : ValueEventListener{
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            val t = object : GenericTypeIndicator<List<String>>() {}
+                                            if (snapshot.exists()) {
+                                                // get courses in course directory
+                                                userCourseList = snapshot.getValue(t)!!
+                                            }
+                                            // add a new course id into course list
+                                            removedCourseList = ListToMutableList.removeElement(userCourseList, model.id!!)
+
+                                            // input new course into the course directory in the user database
+                                            firebaseDatabase.reference
+                                                .child("users")
+                                                .child(firebaseAuth.currentUser!!.uid)
+                                                .child("courses")
+                                                .setValue(removedCourseList)
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {}
+
+                                    })
+
+                                // delete course from firebase storage
+                                firebaseStorage.reference
+                                    .child("courses")
+                                    .child(model.id!!)
+                                    .child("image")
+                                    .child("course_image")
+                                    .delete()
+
+                                // delete course from course database
+                                firebaseDatabase.reference
+                                    .child("courses")
+                                    .child(model.id!!)
+                                    .removeValue()
+                            }
+                            DialogInterface.BUTTON_NEGATIVE -> {}
+                        }
+                    }
+
+                // make alert dialog box (Yes/No)
+                val builder: AlertDialog.Builder = AlertDialog.Builder(holder.courseDeleteButton.context)
+                builder.setMessage("Apakah anda yakin ingin menghapus kursus ini?").setPositiveButton("Ya", dialogClickListener)
+                    .setNegativeButton("Tidak", dialogClickListener).show()
             }
         }
     }
