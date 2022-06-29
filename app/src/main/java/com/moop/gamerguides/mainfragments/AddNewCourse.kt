@@ -62,6 +62,7 @@ class AddNewCourse : Fragment() {
         val courseDescription: EditText = view.findViewById(R.id.course_description_input)
         val gameCategoryDropdown: Spinner = view.findViewById(R.id.course_game_category_input)
         val addCourseButton: Button = view.findViewById(R.id.add_course_button)
+        val courseThumbnailResult: ImageView = view.findViewById(R.id.course_thumbnail_result)
 
         // set spinner list with firebase database data
         // set options for adapter
@@ -104,6 +105,9 @@ class AddNewCourse : Fragment() {
         addCourseButton.setOnClickListener {
             // upload all course data to firebase
             uploadDataToFirebase(courseImagePath, courseTitle.text.toString(), courseDescription.text.toString())
+            courseTitle.setText("")
+            courseDescription.setText("")
+            courseThumbnailResult.setImageDrawable(null)
         }
 
     }
