@@ -1,6 +1,10 @@
+@file:Suppress("DEPRECATION")
+
 package com.moop.gamerguides.mainfragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +12,7 @@ import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +20,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.moop.gamerguides.R
-import com.moop.gamerguides.adapter.CourseAdapter
+import com.moop.gamerguides.adapter.MyCourseAdapter
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.helper.FirebaseUtil
 import com.moop.gamerguides.helper.WrapContentLinearLayoutManager
@@ -23,7 +28,10 @@ import com.moop.gamerguides.helper.WrapContentLinearLayoutManager
 class UserCourses : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var adapter: CourseAdapter
+    private lateinit var adapter: MyCourseAdapter
+    private lateinit var emptyContainer: RelativeLayout
+    private var userCourseCount: Int = 0
+    private lateinit var courseList: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -38,21 +46,48 @@ class UserCourses : Fragment() {
         // initialize Firebase Database
         firebaseDatabase = Firebase.database(FirebaseUtil.firebaseDatabaseURL)
 
-        val emptyContainer: RelativeLayout = view.findViewById(R.id.empty_container)
-        var userCourseCount: Int
+        emptyContainer = view.findViewById(R.id.empty_container)
 
         // set recyclerview layout manager
-        val courseList: RecyclerView = view.findViewById(R.id.course_list)
-        courseList.layoutManager = WrapContentLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        courseList = view.findViewById(R.id.course_list)
+        courseList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        // set adapter options
-        val options = FirebaseRecyclerOptions.Builder<Courses>()
-            .setQuery(firebaseDatabase.reference.child("courses"), Courses::class.java)
-            .build()
+        // swipe down to refresh
+        val swipeRefreshLayout: SwipeRefreshLayout = view.findViewById(R.id.swipe_refresh)
+        swipeRefreshLayout.setOnRefreshListener {
+            initDataFromFirebase()
+            swipeRefreshLayout.isRefreshing = false
+        }
 
-        // create adapter
-        adapter = CourseAdapter(options)
-        courseList.adapter = adapter
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initDataFromFirebase()
+    }
+
+    private fun initDataFromFirebase() {
+        var courseListU: List<String>
+        // get user courses
+        firebaseDatabase.reference
+            .child("users")
+            .child(firebaseAuth.currentUser!!.uid)
+            .child("courses")
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val t = object : GenericTypeIndicator<List<String>>() {}
+                    if (snapshot.exists()) {
+                        // get courses in course directory
+                        courseListU = snapshot.getValue(t)!!
+                        // create adapter
+                        adapter = MyCourseAdapter(courseListU, context)
+                        courseList.adapter = adapter
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
 
         // get course id from user database
         firebaseDatabase.reference
@@ -80,17 +115,5 @@ class UserCourses : Fragment() {
                 override fun onCancelled(error: DatabaseError) {}
 
             })
-
     }
-
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapter.stopListening()
-    }
-
 }
