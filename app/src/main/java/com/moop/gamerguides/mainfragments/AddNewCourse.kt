@@ -17,15 +17,24 @@ import com.firebase.ui.database.FirebaseListAdapter
 import com.firebase.ui.database.FirebaseListOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.R
-import com.moop.gamerguides.adapter.model.Course
+import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.adapter.model.Games
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.ListToMutableList
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.IOException
 
 
@@ -34,7 +43,7 @@ class AddNewCourse : Fragment() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var firebaseStorage: FirebaseStorage
     private lateinit var firebaseListAdapter: FirebaseListAdapter<Games>
-    private lateinit var courseImagePath: Uri
+    private var courseImagePath: Uri? = null
     private lateinit var selectedGameCategory: String
     private lateinit var courseImagePathString: String
 
@@ -76,10 +85,6 @@ class AddNewCourse : Fragment() {
         gameCategoryDropdown.adapter = firebaseListAdapter
 
 
-        //        // static data for spinner
-//        val games = arrayOf("Valorant", "Mobile Legends")
-//        val adapter: ArrayAdapter<String> = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, games)
-
         // course thumbnail input onclick function
         // open gallery for user to upload course thumbnail
         courseThumbnail.setOnClickListener {
@@ -109,51 +114,100 @@ class AddNewCourse : Fragment() {
 
     }
 
-    private fun uploadDataToFirebase(imagePath: Uri, courseTitleText: String, courseDescriptionText: String) {
-        val progressDialog = ProgressDialog(context)
-        progressDialog.setTitle("Uploading Picture")
-        progressDialog.show()
+    private fun uploadDataToFirebase(imagePath: Uri?, courseTitleText: String, courseDescriptionText: String) {
+        // generate a key to use as course ID
+        val courseID = firebaseDatabase.reference.child("courses").push().key
 
-        // upload course image to firebase storage
-        firebaseStorage.reference
+        if (imagePath != null) {
+            // create progress dialog
+            val progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Uploading Picture")
+            progressDialog.show()
+            // upload course image to firebase storage
+            firebaseStorage.reference
+                .child("courses")
+                .child("image")
+                .child("course_image")
+                .putFile(imagePath)
+
+                // upload progress number for ProgressDialog
+                .addOnProgressListener {
+                    val uploadProgress: Double = (100.0 * it.bytesTransferred / it.totalByteCount)
+                    progressDialog.setMessage("Uploaded: ${uploadProgress.toInt()}%")
+                }
+
+                // if course image upload failed
+                .addOnFailureListener {
+
+                    // remove progress dialog
+                    progressDialog.dismiss()
+                    Toast.makeText(context, "Failed to add course", Toast.LENGTH_SHORT)
+                        .show()
+
+                }
+                // if course image upload succeed
+                .addOnCompleteListener {
+
+                    // remove progress dialog
+                    progressDialog.dismiss()
+
+                    // get course image path with string data type from firebase storage
+                    firebaseStorage.reference
+                        .child("courses")
+                        .child("image")
+                        .child("course_image")
+                        .downloadUrl
+                        .addOnSuccessListener {
+
+                            // send course data to firebase database
+                            firebaseDatabase.reference
+                                .child("courses")
+                                .child(courseID!!)
+                                .setValue(
+                                    Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid)
+                                )
+                        }
+                }
+        }
+        else {
+            // send course data to firebase database
+            firebaseDatabase.reference
+                .child("courses")
+                .child(courseID!!)
+                .setValue(
+                    Courses(courseTitleText, "", courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid)
+                )
+        }
+
+        var userCourseList: List<String> = emptyList()
+        var addedCourseList: List<String?>
+
+        // get all courses from course directory
+        firebaseDatabase.reference
+            .child("users")
+            .child(firebaseAuth.currentUser!!.uid)
             .child("courses")
-            .child("image")
-            .child("course_image")
-            .putFile(imagePath)
-            // if course image upload failed
-            .addOnFailureListener {
-                progressDialog.dismiss()
-                Toast.makeText(context, "Failed to add course", Toast.LENGTH_SHORT)
-                    .show()
-            }
-            // if course image upload succeed
-            .addOnCompleteListener {
-
-                progressDialog.dismiss()
-
-                // get course image path with string data type from firebase storage
-                firebaseStorage.reference
-                    .child("courses")
-                    .child("image")
-                    .child("course_image")
-                    .downloadUrl
-                    .addOnSuccessListener {
-
-                        // send course data to firebase database
-                        firebaseDatabase.reference
-                            .child("courses")
-                            .push()
-                            .setValue(
-                                Course(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid)
-                            )
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val t = object : GenericTypeIndicator<List<String>>() {}
+                    if (snapshot.exists()) {
+                        // get courses in course directory
+                        userCourseList = snapshot.getValue(t)!!
                     }
-            }
+                    // add a new course id into course list
+                    addedCourseList = ListToMutableList.addElement(userCourseList, courseID)
 
-            // upload progress number for ProgressDialog
-            .addOnProgressListener {
-                val uploadProgress: Double = (100.0 * it.bytesTransferred / it.totalByteCount)
-                progressDialog.setMessage("Uploaded: ${uploadProgress.toInt()}%")
-            }
+                    // input new course into the course directory in the user database
+                    firebaseDatabase.reference
+                        .child("users")
+                        .child(firebaseAuth.currentUser!!.uid)
+                        .child("courses")
+                        .setValue(addedCourseList)
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
     }
 
     @Deprecated("Deprecated in Java")
