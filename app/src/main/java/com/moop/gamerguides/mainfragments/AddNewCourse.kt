@@ -40,7 +40,6 @@ class AddNewCourse : Fragment() {
     private lateinit var firebaseListAdapter: FirebaseListAdapter<Games>
     private var courseImagePath: Uri? = null
     private lateinit var selectedGameCategory: String
-    private lateinit var courseImagePathString: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -121,6 +120,7 @@ class AddNewCourse : Fragment() {
             // upload course image to firebase storage
             firebaseStorage.reference
                 .child("courses")
+                .child(courseID!!)
                 .child("image")
                 .child("course_image")
                 .putFile(imagePath)
@@ -149,6 +149,7 @@ class AddNewCourse : Fragment() {
                     // get course image path with string data type from firebase storage
                     firebaseStorage.reference
                         .child("courses")
+                        .child(courseID)
                         .child("image")
                         .child("course_image")
                         .downloadUrl
@@ -157,9 +158,9 @@ class AddNewCourse : Fragment() {
                             // send course data to firebase database
                             firebaseDatabase.reference
                                 .child("courses")
-                                .child(courseID!!)
+                                .child(courseID)
                                 .setValue(
-                                    Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid)
+                                    Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                                 )
                         }
                 }
@@ -170,7 +171,7 @@ class AddNewCourse : Fragment() {
                 .child("courses")
                 .child(courseID!!)
                 .setValue(
-                    Courses(courseTitleText, "", courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid)
+                    Courses(courseTitleText, "", courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                 )
         }
 
