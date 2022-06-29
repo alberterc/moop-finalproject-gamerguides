@@ -125,22 +125,29 @@ class EditCourse : AppCompatActivity() {
             }
 
         // get previous course image
-        if (courseImagePath.toString() == "null") {
+        if (courseImagePath == null) {
             imagePath = ""
-        }
-        firebaseDatabase.reference
-            .child("courses")
-            .child(courseID)
-            .child("image")
-            .get()
-            .addOnSuccessListener {
-                if (it.value.toString() != "") {
-                    imagePath = it.value.toString()
+            firebaseDatabase.reference
+                .child("courses")
+                .child(courseID)
+                .child("image")
+                .get()
+                .addOnSuccessListener {
+                    if (it.value.toString() != "") {
+                        imagePath = it.value.toString()
+
+                        // send course data to firebase database
+                        firebaseDatabase.reference
+                            .child("courses")
+                            .child(courseID)
+                            .setValue(
+                                Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                            )
+                        onBackPressed()
+                    }
                 }
-            }
-
-
-        if (courseImagePath != null) {
+        }
+        else {
             // create progress dialog
             val progressDialog = ProgressDialog(this@EditCourse)
             progressDialog.setTitle("Uploading Picture")
@@ -194,16 +201,6 @@ class EditCourse : AppCompatActivity() {
                         }
                     onBackPressed()
                 }
-        }
-        else {
-            // send course data to firebase database
-            firebaseDatabase.reference
-                .child("courses")
-                .child(courseID)
-                .setValue(
-                    Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
-                )
-            onBackPressed()
         }
     }
 
