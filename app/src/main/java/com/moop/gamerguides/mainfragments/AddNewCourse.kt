@@ -29,6 +29,7 @@ import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.adapter.model.Games
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.GameTitleUtil
 import com.moop.gamerguides.helper.ListToMutableList
 import java.io.IOException
 
@@ -115,6 +116,7 @@ class AddNewCourse : Fragment() {
     private fun uploadDataToFirebase(imagePath: Uri?, courseTitleText: String, courseDescriptionText: String) {
         // generate a key to use as course ID
         val courseID = firebaseDatabase.reference.child("courses").push().key
+        val gameTitle = GameTitleUtil.change(selectedGameCategory)
 
         if (imagePath != null) {
             // create progress dialog
@@ -166,6 +168,14 @@ class AddNewCourse : Fragment() {
                                 .setValue(
                                     Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                                 )
+                            firebaseDatabase.reference
+                                .child("games")
+                                .child(gameTitle)
+                                .child("courses")
+                                .child(courseID)
+                                .setValue(
+                                    Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                                )
                         }
                 }
         }
@@ -174,6 +184,14 @@ class AddNewCourse : Fragment() {
             firebaseDatabase.reference
                 .child("courses")
                 .child(courseID!!)
+                .setValue(
+                    Courses(courseTitleText, "", courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                )
+            firebaseDatabase.reference
+                .child("games")
+                .child(gameTitle)
+                .child("courses")
+                .child(courseID)
                 .setValue(
                     Courses(courseTitleText, "", courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                 )
