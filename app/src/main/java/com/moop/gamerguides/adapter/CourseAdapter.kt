@@ -1,5 +1,7 @@
 package com.moop.gamerguides.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
+import com.moop.gamerguides.EditCourse
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.helper.FirebaseUtil
@@ -25,6 +26,7 @@ import com.squareup.picasso.Picasso
 
 class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecyclerAdapter<Courses, CourseAdapter.CourseViewHolder>(
     options) {
+
     class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val courseImage: ShapeableImageView = itemView.findViewById(R.id.course_image)
         val courseTitle: TextView = itemView.findViewById(R.id.course_title)
@@ -79,8 +81,17 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
 
             // edit course button onclick function
             holder.courseEditButton.setOnClickListener {
-                Toast.makeText(holder.courseEditButton.context, "Edit Course", Toast.LENGTH_SHORT)
-                    .show()
+                val intent = Intent(holder.courseEditButton.context, EditCourse::class.java)
+                firebaseDatabase.reference
+                    .child("courses")
+                    .child(model.id!!)
+                    .get()
+                    .addOnSuccessListener {
+                        // get course id for intent
+                        intent.putExtra("courseID", model.id)
+                        // go to edit course activity with the course id
+                        holder.courseEditButton.context.startActivity(intent)
+                    }
             }
 
             // add video button onclick function
