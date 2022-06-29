@@ -57,7 +57,7 @@
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/game_list"
+                android:id="@+id/course_list"
                 android:visibility="invisible"
                 android:layout_alignTop="@id/page_title"
                 android:layout_marginTop="70dp"
