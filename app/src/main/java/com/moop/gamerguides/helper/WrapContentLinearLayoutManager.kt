@@ -29,7 +29,8 @@ class WrapContentLinearLayoutManager : LinearLayoutManager {
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {
-            Log.e("TAG", "found IndexOutOfBoundsException in RecyclerView")
+            e.printStackTrace()
+//            Log.e("TAG", "found IndexOutOfBoundsException in RecyclerView")
         }
     }
 }
