@@ -27,6 +27,7 @@ import com.moop.gamerguides.*
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.GameTitleUtil
 import com.moop.gamerguides.helper.ListToMutableList
 import com.squareup.picasso.Picasso
 
@@ -157,6 +158,27 @@ class MyCourseAdapter: RecyclerView.Adapter<MyCourseAdapter.CourseViewHolder> {
                                     .child("course_image")
                                     .delete()
                                     .addOnFailureListener {}
+
+                                // get game category from course
+                                var gameTitle = ""
+                                var selectedGameCategory = ""
+                                firebaseDatabase.reference
+                                    .child("courses")
+                                    .child(courseID)
+                                    .child("gameCategory")
+                                    .get()
+                                    .addOnSuccessListener {
+                                        selectedGameCategory = it.value.toString()
+                                        gameTitle = GameTitleUtil.change(selectedGameCategory)
+
+                                        // delete course from game category
+                                        firebaseDatabase.reference
+                                            .child("games")
+                                            .child(gameTitle)
+                                            .child("courses")
+                                            .child(courseID)
+                                            .removeValue()
+                                    }
 
                                 // delete course from course database
                                 firebaseDatabase.reference
