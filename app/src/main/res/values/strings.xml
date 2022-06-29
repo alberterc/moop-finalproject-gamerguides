@@ -25,4 +25,5 @@
     <string name="tambahkan_button">Tambahkan</string>
     <string name="akun_title">Akun</string>
     <string name="edit_kursus_title">Edit Kursus</string>
+    <string name="simpan_button">Simpan</string>
 </resources>
