@@ -1,5 +1,6 @@
 package com.moop.gamerguides.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.imageview.ShapeableImageView
+import com.moop.gamerguides.CourseDetails
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Courses
 import com.squareup.picasso.Picasso
@@ -44,6 +46,15 @@ class AllCourseListAdapter: FirebaseRecyclerAdapter<Courses, AllCourseListAdapte
             Picasso.get()
                 .load(model.image)
                 .into(holder.courseImage)
+        }
+
+        // set course layout button onclick function
+        holder.courseLayout.setOnClickListener {
+            val intent = Intent(it.context, CourseDetails::class.java)
+            // get course id for intent
+            intent.putExtra("courseID", model.id)
+            // go to course details activity with the course id
+            it.context.startActivity(intent)
         }
     }
 
