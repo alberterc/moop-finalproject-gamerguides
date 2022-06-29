@@ -59,24 +59,27 @@ class UserCourses : Fragment() {
             .child("users")
             .child(firebaseAuth.currentUser!!.uid)
             .child("courses")
-            .get()
-            .addOnSuccessListener {
-                // get course count from a specific user
-                userCourseCount = it.childrenCount.toInt()
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    // get course count from a specific user
+                    userCourseCount = snapshot.childrenCount.toInt()
 
-                // check if the user has a course
-                // if user has course
-                if (userCourseCount != 0) {
-                    emptyContainer.visibility = View.INVISIBLE
-                    courseList.visibility = View.VISIBLE
+                    // check if the user has a course
+                    // if user has course
+                    if (userCourseCount != 0) {
+                        emptyContainer.visibility = View.INVISIBLE
+                        courseList.visibility = View.VISIBLE
+                    }
+                    // if user doesn't have course
+                    else {
+                        emptyContainer.visibility = View.VISIBLE
+                        courseList.visibility = View.INVISIBLE
+                    }
                 }
-                // if user doesn't have course
-                else {
-                    emptyContainer.visibility = View.VISIBLE
-                    courseList.visibility = View.INVISIBLE
-                }
-            }
 
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
 
     }
 
