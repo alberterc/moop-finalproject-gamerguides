@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.firebase.ui.database.FirebaseListAdapter
@@ -30,6 +31,10 @@ class EditCourse : AppCompatActivity() {
     private lateinit var firebaseListAdapter: FirebaseListAdapter<Games>
     private var courseImagePath: Uri? = null
     private lateinit var selectedGameCategory: String
+    private lateinit var courseID: String
+    private lateinit var courseTitleText: String
+    private lateinit var courseDescriptionText: String
+    private lateinit var imagePath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,16 +99,15 @@ class EditCourse : AppCompatActivity() {
 
     private fun uploadDataToFirebase(courseImagePath: Uri?, titleText: String, descriptionText: String) {
         // get course ID
-        val courseID = intent.extras!!.getString("courseID")
+        courseID = intent.extras!!.getString("courseID")!!
 
-        var courseTitleText = titleText
-        var courseDescriptionText = descriptionText
-        var imagePath = courseImagePath.toString()
+        courseTitleText = titleText
+        courseDescriptionText = descriptionText
 
         // get previous course title
         firebaseDatabase.reference
             .child("courses")
-            .child(courseID!!)
+            .child(courseID)
             .child("title")
             .get()
             .addOnSuccessListener {
@@ -124,9 +128,26 @@ class EditCourse : AppCompatActivity() {
                 }
             }
 
-        // get previous course image
+        // get previous course videos
+        firebaseDatabase.reference
+            .child("courses")
+            .child(courseID)
+            .child("videos")
+            .get()
+            .addOnSuccessListener { video ->
+                if (video.value != null) {
+                    initFirebaseData(video.value, courseImagePath)
+                }
+                else {
+                    initFirebaseData(null, courseImagePath)
+                }
+            }
+    }
+
+    private fun initFirebaseData(video: Any?, courseImagePath: Uri?) {
         if (courseImagePath == null) {
             imagePath = ""
+            // get previous course image
             firebaseDatabase.reference
                 .child("courses")
                 .child(courseID)
@@ -135,7 +156,6 @@ class EditCourse : AppCompatActivity() {
                 .addOnSuccessListener {
                     if (it.value.toString() != "") {
                         imagePath = it.value.toString()
-
                         // send course data to firebase database
                         firebaseDatabase.reference
                             .child("courses")
@@ -143,8 +163,23 @@ class EditCourse : AppCompatActivity() {
                             .setValue(
                                 Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                             )
-                        onBackPressed()
                     }
+                    else {
+                        firebaseDatabase.reference
+                            .child("courses")
+                            .child(courseID)
+                            .setValue(
+                                Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                            )
+                    }
+                    // send video to firebase
+                    firebaseDatabase.reference
+                        .child("courses")
+                        .child(courseID)
+                        .child("videos")
+                        .setValue(video)
+
+                    onBackPressed()
                 }
         }
         else {
@@ -158,7 +193,7 @@ class EditCourse : AppCompatActivity() {
                 .child(courseID)
                 .child("image")
                 .child("course_image")
-                .putFile(courseImagePath)
+                .putFile(this.courseImagePath!!)
 
                 // upload progress number for ProgressDialog
                 .addOnProgressListener {
@@ -198,6 +233,13 @@ class EditCourse : AppCompatActivity() {
                                 .setValue(
                                     Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                                 )
+
+                            // send video to firebase
+                            firebaseDatabase.reference
+                                .child("courses")
+                                .child(courseID)
+                                .child("videos")
+                                .setValue(video)
                         }
                     onBackPressed()
                 }
