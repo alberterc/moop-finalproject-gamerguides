@@ -3,6 +3,7 @@ package com.moop.gamerguides.adapter
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import com.moop.gamerguides.AddNewVideo
 import com.moop.gamerguides.EditCourse
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Courses
@@ -72,11 +74,13 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
             // get course video count from firebase database
             firebaseDatabase.reference
                 .child("courses")
+                .child(model.id!!)
                 .child("videos")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             holder.courseVideoCount.text = snapshot.childrenCount.toString()
+                            Log.e("VIDEO COUNT", snapshot.childrenCount.toString())
                         }
                         else {
                             holder.courseVideoCount.text = "0"
@@ -97,8 +101,11 @@ class CourseAdapter(options: FirebaseRecyclerOptions<Courses>) : FirebaseRecycle
 
             // add video button onclick function
             holder.courseAddVideoButton.setOnClickListener {
-                Toast.makeText(holder.courseEditButton.context, "Add Video", Toast.LENGTH_SHORT)
-                    .show()
+                val intent = Intent(holder.courseAddVideoButton.context, AddNewVideo::class.java)
+                // get course id for intent
+                intent.putExtra("courseID", model.id)
+                // go to add new video activity with the course id
+                holder.courseAddVideoButton.context.startActivity(intent)
             }
 
             // delete course button onclick function
