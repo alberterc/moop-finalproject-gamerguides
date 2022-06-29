@@ -179,6 +179,7 @@ class AddNewCourse : Fragment() {
                 )
         }
 
+        // store user courses id in user database
         var userCourseList: List<String> = emptyList()
         var addedCourseList: List<String?>
 
