@@ -1,15 +1,17 @@
 package com.moop.gamerguides.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.imageview.ShapeableImageView
+import com.moop.gamerguides.AllCourseList
 import com.moop.gamerguides.R
 import com.moop.gamerguides.adapter.model.Games
 import com.squareup.picasso.Picasso
@@ -38,8 +40,9 @@ class GameAdapter(options: FirebaseRecyclerOptions<Games>):
 
         // game onclick function
         holder.gameLayout.setOnClickListener {
-            Toast.makeText(holder.gameTitle.context, holder.gameTitle.text.toString(), Toast.LENGTH_SHORT)
-                .show()
+            val intent = Intent(it.context, AllCourseList::class.java)
+            intent.putExtra("gameTitle", model.title)
+            it.context.startActivity(intent)
         }
     }
 }
