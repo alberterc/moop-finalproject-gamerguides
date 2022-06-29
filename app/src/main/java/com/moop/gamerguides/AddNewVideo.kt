@@ -15,8 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.moop.gamerguides.adapter.model.Courses
-import com.moop.gamerguides.adapter.model.Video
+import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
 import java.io.IOException
 
@@ -143,7 +142,7 @@ class AddNewVideo : AppCompatActivity() {
                                 .child("videos")
                                 .child(videoID)
                                 .setValue(
-                                    Video(videoTitleText, it.toString(), videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, courseID)
+                                    Videos(videoTitleText, it.toString(), videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, courseID)
                                 )
                         }
                 }
@@ -156,7 +155,7 @@ class AddNewVideo : AppCompatActivity() {
                 .child("videos")
                 .child(videoID!!)
                 .setValue(
-                    Video(videoTitleText, "", videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, courseID)
+                    Videos(videoTitleText, "", videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, courseID)
                 )
         }
     }
