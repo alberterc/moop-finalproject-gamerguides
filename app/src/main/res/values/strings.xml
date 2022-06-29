@@ -26,4 +26,8 @@
     <string name="akun_title">Akun</string>
     <string name="edit_kursus_title">Edit Kursus</string>
     <string name="simpan_button">Simpan</string>
+    <string name="tambahkan_video_title">Tambahkan Video</string>
+    <string name="nama_video_title">Nama Video</string>
+    <string name="deskripsi_video_title">Deskripsi Video</string>
+    <string name="link_video_title">Link Video</string>
 </resources>
