@@ -1,6 +1,6 @@
 package com.moop.gamerguides.adapter.model
 
-class Course {
+class Courses {
     var title: String? = ""
     var image: String? = ""
     var description: String? = ""
