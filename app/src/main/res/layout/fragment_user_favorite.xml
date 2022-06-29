@@ -12,7 +12,7 @@
 
         <TextView
                 android:id="@+id/page_title"
-                android:text="Daftar Keinginan"
+                android:text="Daftar Favorite"
                 android:fontFamily="@font/montserrat_bold"
                 android:textSize="20sp"
                 android:textColor="@color/main_textcolor"
@@ -49,7 +49,7 @@
 
                 <TextView
                         android:id="@+id/text_empty"
-                        android:text="Daftar keinginan anda akan disimpan di sini."
+                        android:text="Daftar favorite anda akan disimpan di sini."
                         android:layout_centerHorizontal="true"
                         android:textColor="#70FFFFFF"
                         android:textSize="14sp"
