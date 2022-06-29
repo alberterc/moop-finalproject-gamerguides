@@ -29,7 +29,7 @@ class MainMenu : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_menu)
 
         // default bottom navigation bar with floating action button
         val bottomNavBar: BottomNavigationView = findViewById(R.id.bottom_nav_bar)
