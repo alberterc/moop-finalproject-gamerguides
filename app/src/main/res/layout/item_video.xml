@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/item_video_container"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="#2C293E"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+    <RelativeLayout
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/video_image"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                app:shapeAppearanceOverlay="@style/roundedImageBorder"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="110dp"
+                android:layout_height="70dp"
+        />
+
+        <TextView
+                android:id="@+id/video_title"
+                android:layout_centerVertical="true"
+                android:text="Video Title"
+                android:textSize="16sp"
+                android:textColor="@color/main_textcolor"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_toEndOf="@id/video_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
