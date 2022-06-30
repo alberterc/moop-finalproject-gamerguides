@@ -1,5 +1,6 @@
 package com.moop.gamerguides.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,17 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.moop.gamerguides.R
+import com.moop.gamerguides.VideoDetails
 import com.moop.gamerguides.adapter.model.Videos
 import com.squareup.picasso.Picasso
 
-class VideoAdapter(options: FirebaseRecyclerOptions<Videos>) :
-    FirebaseRecyclerAdapter<Videos, VideoAdapter.ViewHolder>(options) {
+class VideoAdapter : FirebaseRecyclerAdapter<Videos, VideoAdapter.ViewHolder> {
+
+    private var courseID: String
+
+    constructor(options: FirebaseRecyclerOptions<Videos>, courseID: String) : super(options) {
+        this.courseID = courseID
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val videoTitle: TextView = itemView.findViewById(R.id.video_title)
@@ -39,6 +46,17 @@ class VideoAdapter(options: FirebaseRecyclerOptions<Videos>) :
             Picasso.get()
                 .load(model.image)
                 .into(holder.videoImage)
+        }
+
+        // set video card layout onclick function
+        holder.videoLayout.setOnClickListener {
+            val intent = Intent(it.context, VideoDetails::class.java)
+            // get course id for intent
+            intent.putExtra("courseID", courseID)
+            // get video id for intent
+            intent.putExtra("videoID", model.id)
+            // go to course details activity with the course id
+            it.context.startActivity(intent)
         }
     }
 }
