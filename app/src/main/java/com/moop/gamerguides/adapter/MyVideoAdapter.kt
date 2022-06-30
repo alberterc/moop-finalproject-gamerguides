@@ -24,6 +24,7 @@ import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.CourseDetails
 import com.moop.gamerguides.EditVideo
 import com.moop.gamerguides.R
+import com.moop.gamerguides.VideoDetails
 import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
 import com.moop.gamerguides.helper.GameTitleUtil
@@ -91,15 +92,8 @@ class MyVideoAdapter :
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
                             // delete video image from firebase storage
-                            firebaseStorage.reference
-                                .child("courses")
-                                .child(courseID)
-                                .child("videos")
-                                .child(model.id)
-                                .child("image")
-                                .child("video_image")
-                                .delete()
-                                .addOnFailureListener {}
+                            val path = "courses/${courseID}/videos/${model.id}"
+                            FirebaseUtil.deleteStorageFolder(path)
 
                             // delete video from course database
                             firebaseDatabase.reference
@@ -121,5 +115,14 @@ class MyVideoAdapter :
         }
 
         // video card layout onclick function
+        holder.videoLayout.setOnClickListener {
+            val intent = Intent(it.context, VideoDetails::class.java)
+            // get course id for intent
+            intent.putExtra("courseID", courseID)
+            // get video id for intent
+            intent.putExtra("videoID", model.id)
+            // go to course details activity with the course id
+            it.context.startActivity(intent)
+        }
     }
 }

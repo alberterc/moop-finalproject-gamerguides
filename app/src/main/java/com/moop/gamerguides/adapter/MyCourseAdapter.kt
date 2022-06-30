@@ -47,8 +47,6 @@ class MyCourseAdapter: RecyclerView.Adapter<MyCourseAdapter.CourseViewHolder> {
             val firebaseAuth: FirebaseAuth = Firebase.auth
             // initialize Firebase Database
             val firebaseDatabase: FirebaseDatabase = Firebase.database(FirebaseUtil.firebaseDatabaseURL)
-            // initialize Firebase storage
-            val firebaseStorage: FirebaseStorage = Firebase.storage(FirebaseUtil.firebaseStorageURL)
 
             // set course title
             firebaseDatabase.reference
@@ -151,13 +149,8 @@ class MyCourseAdapter: RecyclerView.Adapter<MyCourseAdapter.CourseViewHolder> {
                                     })
 
                                 // delete course from firebase storage
-                                firebaseStorage.reference
-                                    .child("courses")
-                                    .child(courseID)
-                                    .child("image")
-                                    .child("course_image")
-                                    .delete()
-                                    .addOnFailureListener {}
+                                val path = "courses/${courseID}"
+                                FirebaseUtil.deleteStorageFolder(path)
 
                                 // get game category from course
                                 var gameTitle = ""
