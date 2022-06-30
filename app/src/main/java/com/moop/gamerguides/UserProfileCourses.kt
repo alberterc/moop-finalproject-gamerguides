@@ -11,6 +11,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.moop.gamerguides.adapter.UserProfileCoursesAdapter
 import com.moop.gamerguides.helper.FirebaseUtil
+import com.moop.gamerguides.helper.WrapContentLinearLayoutManager
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -40,7 +41,7 @@ class UserProfileCourses : AppCompatActivity() {
         userBio.movementMethod = ScrollingMovementMethod()
 
         // set recycler view layout manager
-        userCourseList.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        userCourseList.layoutManager = WrapContentLinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
 
         // get course id to get user id for this course id
         val courseID = intent.extras!!.getString("courseID")
