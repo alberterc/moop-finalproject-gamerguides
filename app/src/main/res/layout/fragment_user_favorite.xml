@@ -6,29 +6,27 @@
              android:background="@color/main_background"
              tools:context=".mainfragments.UserFavorites">
 
-    <RelativeLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-        <TextView
-                android:id="@+id/page_title"
-                android:text="Daftar Favorite"
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="20sp"
-                android:textColor="@color/main_textcolor"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-        />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh"
-                android:layout_alignTop="@id/page_title"
-                android:layout_marginTop="70dp"
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/page_title"
+                    android:text="@string/daftar_favorite_title"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/main_textcolor"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
 
             <RelativeLayout
                     android:id="@+id/empty_container"
@@ -63,7 +61,8 @@
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/wishlist_list"
+                    android:id="@+id/favorite_list"
+                    android:visibility="invisible"
                     android:layout_alignTop="@id/page_title"
                     android:layout_marginTop="70dp"
                     android:layout_marginStart="20dp"
@@ -72,8 +71,8 @@
                     android:layout_height="wrap_content"
             />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>
