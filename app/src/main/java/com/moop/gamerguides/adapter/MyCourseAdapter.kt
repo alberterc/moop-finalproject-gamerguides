@@ -132,7 +132,7 @@ class MyCourseAdapter: RecyclerView.Adapter<MyCourseAdapter.CourseViewHolder> {
                                                 // get courses in course directory
                                                 userCourseList = snapshot.getValue(t)!!
                                             }
-                                            // add a new course id into course list
+                                            // remove the course id from course list
                                             removedCourseList =
                                                 ListToMutableList.removeElement(userCourseList, courseID)
 
@@ -192,11 +192,11 @@ class MyCourseAdapter: RecyclerView.Adapter<MyCourseAdapter.CourseViewHolder> {
 
             // set course card onclick function
             courseLayout.setOnClickListener {
-                val intent = Intent(courseEditButton.context, MyCourseDetails::class.java)
+                val intent = Intent(it.context, MyCourseDetails::class.java)
                 // get course id for intent
                 intent.putExtra("courseID", courseID)
                 // go to my course details activity with the course id
-                courseEditButton.context.startActivity(intent)
+                it.context.startActivity(intent)
             }
 
         }
