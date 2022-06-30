@@ -10,15 +10,30 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.GamerGuides">
         <activity
+                android:name=".UserProfileCourses"
+                android:exported="true"/>
+        <activity
+                android:name=".VideoDetails"
+                android:exported="true"/>
+        <activity
+                android:name=".EditVideo"
+                android:exported="true"/>
+        <activity
+                android:name=".AllCourseList"
+                android:exported="true"/>
+        <activity
+                android:name=".MyCourseDetails"
+                android:exported="true"/>
+        <activity
+                android:name=".CourseDetails"
+                android:exported="true"/>
+        <activity
+                android:name=".AddNewVideo"
+                android:exported="true"/>
+        <activity
                 android:name=".IntroScreen"
                 android:exported="true"
-                android:theme="@style/SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+                android:theme="@style/SplashScreen"/>
         <activity
                 android:name=".userprofile.AccountSettings"
                 android:exported="true"/>
@@ -39,7 +54,13 @@
                 android:exported="true"/>
         <activity
                 android:name=".MainMenu"
-                android:exported="true"/>
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
 
         <meta-data
                 android:name="preloaded_fonts"
