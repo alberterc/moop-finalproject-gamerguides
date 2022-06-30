@@ -108,6 +108,7 @@ class AddNewCourse : Fragment() {
             uploadDataToFirebase(courseImagePath, courseTitle.text.toString(), courseDescription.text.toString())
             courseTitle.setText("")
             courseDescription.setText("")
+            courseImagePath = null
             courseThumbnailResult.setImageDrawable(null)
         }
 
