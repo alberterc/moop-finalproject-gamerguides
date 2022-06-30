@@ -67,8 +67,10 @@ class AddNewVideo : AppCompatActivity() {
                 videoTitleInput.setText("")
                 videoDescriptionInput.setText("")
                 videoImageResult.setImageDrawable(null)
+                videoImagePath = null
                 videoURLInput.error = null
                 videoURLInput.setText("")
+                onBackPressed()
             }
             else {
                 videoURLInput.error = "Link video tidak bisa kosong."
@@ -124,7 +126,7 @@ class AddNewVideo : AppCompatActivity() {
                     // remove progress dialog
                     progressDialog.dismiss()
 
-                    // get course image path with string data type from firebase storage
+                    // get video image path with string data type from firebase storage
                     firebaseStorage.reference
                         .child("courses")
                         .child(courseID)
@@ -142,7 +144,7 @@ class AddNewVideo : AppCompatActivity() {
                                 .child("videos")
                                 .child(videoID)
                                 .setValue(
-                                    Videos(videoTitleText, it.toString(), videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, courseID)
+                                    Videos(videoTitleText, it.toString(), videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, videoID)
                                 )
                         }
                 }
@@ -155,7 +157,7 @@ class AddNewVideo : AppCompatActivity() {
                 .child("videos")
                 .child(videoID!!)
                 .setValue(
-                    Videos(videoTitleText, "", videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, courseID)
+                    Videos(videoTitleText, "", videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, videoID)
                 )
         }
     }
@@ -170,7 +172,7 @@ class AddNewVideo : AppCompatActivity() {
             try {
                 videoImagePath = fileImagePath
                 // show chosen course thumbnail
-                val courseThumbnailResult: ImageView = findViewById(R.id.course_thumbnail_result)
+                val courseThumbnailResult: ImageView = findViewById(R.id.video_thumbnail_result)
                 courseThumbnailResult.setImageURI(videoImagePath)
             } catch (e: IOException) {
                 e.printStackTrace()
