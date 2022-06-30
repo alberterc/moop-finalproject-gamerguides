@@ -53,15 +53,15 @@ class AccountSettings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_settings)
 
-        // refresh fragment every 1 second
+        // refresh user info every 250 second
         val refreshHandler = Handler()
         val runnable: Runnable = object : Runnable {
             override fun run() {
                 initUserInfoFirebase()
-                refreshHandler.postDelayed(this, 1 * 1000)
+                refreshHandler.postDelayed(this, 250)
             }
         }
-        refreshHandler.postDelayed(runnable, 1 * 1000)
+        refreshHandler.postDelayed(runnable, 250)
 
         // top back button
         val topBackButton: ImageView = findViewById(R.id.back_button)
@@ -99,8 +99,6 @@ class AccountSettings : AppCompatActivity() {
             }
             else {
                 bioChangedString = bioInput.text.toString()
-                Log.e("ACCOUNT", bioChangedString)
-                Log.e("ACCOUNT", "INPUT: ${bioInput.text}")
             }
         }
 
@@ -113,10 +111,16 @@ class AccountSettings : AppCompatActivity() {
             if (usernameInput.text.matches(Regex("^[^\\s].+[^\\s]\$"))) {
                 val profileUpdate = userProfileChangeRequest {
                     // set user account display name
+                    // store in firebase auth
                     displayName = usernameInput.text.toString()
                 }
-                // update user info
+                // update user info in firebase auth
                 user!!.updateProfile(profileUpdate)
+
+                // store in firebase database
+                firebaseDatabase.reference
+                    .child("users").child(user.uid).child("name")
+                    .setValue(usernameInput.text.toString())
             }
 
             // set default user bio
@@ -202,7 +206,6 @@ class AccountSettings : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Uploaded", Toast.LENGTH_SHORT).show()
 
                     // set user profile picture in Firebase realtime database
-                    // set default user profile picture
                     // get default picture from Firebase cloud storage
                     firebaseStorage.reference
                         .child("users/${user.uid}/profile_picture")

@@ -113,7 +113,7 @@ class SignUp : AppCompatActivity() {
                     }
                     // update user info
                     user!!.updateProfile(profileUpdate)
-                    writeDatabaseNewUser(user.uid, user.email)
+                    writeDatabaseNewUser(user.uid, user.email, username)
 
                     // go to MainMenu activity
                     startActivity(Intent(applicationContext, MainMenu::class.java))
@@ -162,16 +162,25 @@ class SignUp : AppCompatActivity() {
             }
     }
 
-    private fun writeDatabaseNewUser(uid: String?, email: String?) {
+    private fun writeDatabaseNewUser(uid: String?, email: String?, displayName: String?) {
         // default user info
         val userBio = "Hello!"
-        val userPhoneNumber = "Unknown"
 
         if (uid != null) {
             // set default user bio
             firebaseDatabase.reference
                 .child("users").child(uid).child("bio")
                 .setValue(userBio)
+
+            // store user email in firebase database
+            firebaseDatabase.reference
+                .child("users").child(uid).child("email")
+                .setValue(email)
+
+            // store user name in firebase database
+            firebaseDatabase.reference
+                .child("users").child(uid).child("name")
+                .setValue(displayName)
 
             // set default user profile picture
             // get default picture from Firebase cloud storage
