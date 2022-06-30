@@ -36,6 +36,7 @@
         <EditText
                 android:id="@+id/username_input"
                 android:hint="Username"
+                android:textColorHint="#808080"
                 android:inputType="text"
                 android:background="@drawable/user_text_input_background"
                 android:fontFamily="@font/montserrat_regular"
@@ -49,6 +50,7 @@
         <EditText
                 android:id="@+id/email_input"
                 android:hint="Email"
+                android:textColorHint="#808080"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/user_text_input_background"
                 android:fontFamily="@font/montserrat_regular"
@@ -75,6 +77,7 @@
                 <EditText
                         android:id="@+id/password_input"
                         android:hint="Password"
+                        android:textColorHint="#808080"
                         android:inputType="textPassword"
                         android:fontFamily="@font/montserrat_regular"
                         android:background="@null"
@@ -142,7 +145,7 @@
 
             <TextView
                     android:id="@+id/login_text"
-                    android:text="Already have an account?"
+                    android:text="Telah punya akun?"
                     android:textColor="@color/main_textcolor"
                     android:textSize="14sp"
                     android:fontFamily="@font/montserrat_regular"

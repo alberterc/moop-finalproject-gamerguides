@@ -36,6 +36,7 @@
         <EditText
                 android:id="@+id/email_input"
                 android:hint="Email"
+                android:textColorHint="#808080"
                 android:layout_below="@id/app_logo"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/user_text_input_background"
@@ -62,6 +63,7 @@
                 <EditText
                         android:id="@+id/password_input"
                         android:hint="Password"
+                        android:textColorHint="#808080"
                         android:inputType="textPassword"
                         android:background="@drawable/user_text_input_background"
                         android:fontFamily="@font/montserrat_regular"
@@ -103,7 +105,7 @@
 
         <TextView
                 android:id="@+id/forgot_password"
-                android:text="Forgot password"
+                android:text="Lupa Password"
                 android:textSize="14sp"
                 android:textColor="#1760CE"
                 android:fontFamily="@font/montserrat_regular"
@@ -143,7 +145,7 @@
 
             <TextView
                     android:id="@+id/signup_text"
-                    android:text="Don't have an account?"
+                    android:text="Tidak punya akun?"
                     android:textColor="@color/main_textcolor"
                     android:textSize="14sp"
                     android:fontFamily="@font/montserrat_regular"

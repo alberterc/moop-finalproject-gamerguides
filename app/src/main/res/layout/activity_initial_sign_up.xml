@@ -26,7 +26,7 @@
 
         <TextView
                 android:id="@+id/create_account_title"
-                android:text="CREATE AN ACCOUNT"
+                android:text="BUAT SEBUAH AKUN"
                 android:textSize="24sp"
                 android:textColor="@color/main_textcolor"
                 android:textStyle="bold"
@@ -41,7 +41,7 @@
 
         <TextView
                 android:id="@+id/create_account_details"
-                android:text="@string/lorem_ipsum_dummy"
+                android:text="@string/initial_sign_up_text"
                 android:textSize="15sp"
                 android:textColor="@color/main_textcolor"
                 android:textAlignment="center"
@@ -59,7 +59,7 @@
                 android:id="@+id/create_account_button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/main_button_background"
-                android:text="Create Account"
+                android:text="Buat Akun"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat_bold"
@@ -75,7 +75,7 @@
         <TextView
                 android:id="@+id/already_have_account"
                 android:clickable="true"
-                android:text="Already have an account?"
+                android:text="Telah punya akun?"
                 android:textColor="#1760CE"
                 android:fontFamily="@font/montserrat_regular"
                 android:layout_alignTop="@id/create_account_button"

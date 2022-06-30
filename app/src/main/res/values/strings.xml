@@ -32,4 +32,10 @@
     <string name="link_video_title">Link Video</string>
     <string name="edit_video_title">Edit Video</string>
     <string name="daftar_favorite_title">Daftar Favorite</string>
+    <string name="get_started_text">Ayo temukan dan pelajari game kesukaanmu sekarang! <br/><br/>Hanya di Gamers Guide kamu
+        bisa tingkatkan dan kuasai semua skillmu.
+    </string>
+    <string name="initial_sign_up_text">Segera temukan dan pelajari game kesukaanmu sekarang dengan mendaftarkan akunmu
+        disini. <br/><br/>Apa yang kalian tunggu? Buatlah sebuah akun sekarang juga!
+    </string>
 </resources>

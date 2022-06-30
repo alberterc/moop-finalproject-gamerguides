@@ -26,7 +26,7 @@
 
         <TextView
                 android:id="@+id/getstarted_title"
-                android:text="LOREM IPSUM DOLOR"
+                android:text="NIKMATI KURSUS GAME"
                 android:textSize="24sp"
                 android:textColor="@color/main_textcolor"
                 android:textStyle="bold"
@@ -41,8 +41,8 @@
 
         <TextView
                 android:id="@+id/getstarted_details"
-                android:text="@string/lorem_ipsum_dummy"
-                android:textSize="15sp"
+                android:text="@string/get_started_text"
+                android:textSize="16sp"
                 android:textColor="@color/main_textcolor"
                 android:fontFamily="@font/montserrat_regular"
                 android:textAlignment="center"
@@ -59,7 +59,7 @@
                 android:id="@+id/getstarted_button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/main_button_background"
-                android:text="Get Started"
+                android:text="Mari Kita Mulai"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat_bold"
