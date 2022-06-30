@@ -17,7 +17,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
-import java.io.IOException
+import com.moop.gamerguides.helper.YouTubeUtil
 
 class EditVideo : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -57,7 +57,7 @@ class EditVideo : AppCompatActivity() {
         // send data to firebase database
         saveVideoButton.setOnClickListener {
             // upload all course data to firebase
-            uploadDataToFirebase(videoImagePath, videoTitleView.text.toString(), videoDescriptionView.text.toString(), videoURLView.text.toString())
+            uploadDataToFirebase(videoImagePath, videoTitleView.text.toString(), videoDescriptionView.text.toString(), YouTubeUtil.getVideoId(videoURLView.text.toString()))
         }
     }
 
@@ -182,7 +182,7 @@ class EditVideo : AppCompatActivity() {
                 // show chosen course thumbnail
                 val videoThumbnailResult: ImageView = findViewById(R.id.video_thumbnail_result)
                 videoThumbnailResult.setImageURI(videoImagePath)
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
