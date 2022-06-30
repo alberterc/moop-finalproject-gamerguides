@@ -70,7 +70,6 @@ class AddNewVideo : AppCompatActivity() {
                 videoImagePath = null
                 videoURLInput.error = null
                 videoURLInput.setText("")
-                onBackPressed()
             }
             else {
                 videoURLInput.error = "Link video tidak bisa kosong."
@@ -118,6 +117,7 @@ class AddNewVideo : AppCompatActivity() {
                     progressDialog.dismiss()
                     Toast.makeText(applicationContext, "Failed to add video", Toast.LENGTH_SHORT)
                         .show()
+                    onBackPressed()
 
                 }
                 // if video image upload succeed
@@ -147,6 +147,8 @@ class AddNewVideo : AppCompatActivity() {
                                     Videos(videoTitleText, it.toString(), videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, videoID)
                                 )
                         }
+
+                    onBackPressed()
                 }
         }
         else {
@@ -159,6 +161,8 @@ class AddNewVideo : AppCompatActivity() {
                 .setValue(
                     Videos(videoTitleText, "", videoDescriptionText, videoURLText, firebaseAuth.currentUser!!.uid, videoID)
                 )
+
+            onBackPressed()
         }
     }
 
