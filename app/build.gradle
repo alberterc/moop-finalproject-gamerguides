@@ -63,6 +63,9 @@ dependencies {
 
     // picasso for image loading from url
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    // youtube android player api
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'
