@@ -22,6 +22,7 @@ import com.moop.gamerguides.adapter.MyVideoAdapter
 import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
 import com.moop.gamerguides.helper.WrapContentLinearLayoutManager
+import com.moop.gamerguides.helper.makeScrollableInScrollView
 import com.squareup.picasso.Picasso
 
 class MyCourseDetails : AppCompatActivity() {
@@ -49,6 +50,8 @@ class MyCourseDetails : AppCompatActivity() {
 
         // make course description view scrollable
         courseDescriptionView.movementMethod = ScrollingMovementMethod()
+        // course description scrollable
+        courseDescriptionView.makeScrollableInScrollView()
 
         // receive course id from intent
         val courseID = intent.extras!!.getString("courseID")

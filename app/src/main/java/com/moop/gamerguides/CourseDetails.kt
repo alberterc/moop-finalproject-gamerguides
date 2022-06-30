@@ -2,6 +2,7 @@
 
 package com.moop.gamerguides
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -23,7 +24,10 @@ import com.moop.gamerguides.adapter.VideoAdapter
 import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
 import com.moop.gamerguides.helper.ListToMutableList
+import com.moop.gamerguides.helper.WrapContentLinearLayoutManager
+import com.moop.gamerguides.helper.makeScrollableInScrollView
 import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 
 class CourseDetails : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -51,12 +55,23 @@ class CourseDetails : AppCompatActivity() {
 
         // make course description view scrollable
         courseDescriptionView.movementMethod = ScrollingMovementMethod()
+        // course description scrollable
+        courseDescriptionView.makeScrollableInScrollView()
 
         // receive course id from intent
         val courseID = intent.extras!!.getString("courseID")
 
         // course database reference
         val courseRef: DatabaseReference = firebaseDatabase.reference.child("courses").child(courseID!!)
+
+        // get user ID from course ID
+        courseRef.child("uid")
+            .get()
+            .addOnSuccessListener {
+                val userRef: DatabaseReference = firebaseDatabase.reference.child("users").child(it.value.toString())
+                // set course's user profile info
+                setUserProfileInfo(userRef)
+            }
 
         // get course title from firebase database
         courseRef.child("title").get()
@@ -91,10 +106,17 @@ class CourseDetails : AppCompatActivity() {
 
         // create adapter
         adapter = VideoAdapter(options, courseID)
-        videoList.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        videoList.layoutManager = WrapContentLinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
         videoList.adapter = adapter
 
         // user profile card view onclick function
+        userProfileButton.setOnClickListener {
+            val intent = Intent(applicationContext, UserProfileCourses::class.java)
+            // get course id for intent
+            intent.putExtra("courseID", courseID)
+            // go to add new video activity with the course id
+            startActivity(intent)
+        }
 
         // add to favorite button onclick function
         addToFavoriteButton.setOnClickListener {
@@ -173,6 +195,35 @@ class CourseDetails : AppCompatActivity() {
             }
         }
         refreshHandler.postDelayed(runnable, 250)
+    }
+
+    private fun setUserProfileInfo(userRef: DatabaseReference) {
+        val userImage: CircleImageView = findViewById(R.id.user_profile_picture)
+        val userName: TextView = findViewById(R.id.user_display_name)
+        val userEmail: TextView = findViewById(R.id.user_email_text)
+
+        // get user profile picture from database
+        userRef.child("profile_picture")
+            .get()
+            .addOnSuccessListener {
+                Picasso.get()
+                    .load(it.value.toString())
+                    .into(userImage)
+            }
+
+        // get user name from database
+        userRef.child("name")
+            .get()
+            .addOnSuccessListener {
+                userName.text = it.value.toString()
+            }
+
+        // get user email from database
+        userRef.child("email")
+            .get()
+            .addOnSuccessListener {
+                userEmail.text = it.value.toString()
+            }
     }
 
     private fun checkIsFavorite(courseID: String, addToFavoriteButton: TextView) {
