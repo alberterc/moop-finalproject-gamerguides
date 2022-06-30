@@ -90,7 +90,7 @@ class CourseDetails : AppCompatActivity() {
             .build()
 
         // create adapter
-        adapter = VideoAdapter(options)
+        adapter = VideoAdapter(options, courseID)
         videoList.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
         videoList.adapter = adapter
 
