@@ -22,7 +22,7 @@ import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.adapter.model.Courses
 import com.moop.gamerguides.adapter.model.Games
 import com.moop.gamerguides.helper.FirebaseUtil
-import java.io.IOException
+import com.moop.gamerguides.helper.GameTitleUtil
 
 class EditCourse : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -163,9 +163,29 @@ class EditCourse : AppCompatActivity() {
                             .setValue(
                                 Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                             )
+
+                        // send course data to firebase database (games directory)
+                        firebaseDatabase.reference
+                            .child("games")
+                            .child(GameTitleUtil.change(selectedGameCategory))
+                            .child("courses")
+                            .child(courseID)
+                            .setValue(
+                                Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                            )
                     }
                     else {
                         firebaseDatabase.reference
+                            .child("courses")
+                            .child(courseID)
+                            .setValue(
+                                Courses(courseTitleText, imagePath, courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                            )
+
+                        // send course data to firebase database (games directory)
+                        firebaseDatabase.reference
+                            .child("games")
+                            .child(GameTitleUtil.change(selectedGameCategory))
                             .child("courses")
                             .child(courseID)
                             .setValue(
@@ -234,6 +254,16 @@ class EditCourse : AppCompatActivity() {
                                     Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
                                 )
 
+                            // send course data to firebase database (games directory)
+                            firebaseDatabase.reference
+                                .child("games")
+                                .child(GameTitleUtil.change(selectedGameCategory))
+                                .child("courses")
+                                .child(courseID)
+                                .setValue(
+                                    Courses(courseTitleText, it.toString(), courseDescriptionText, selectedGameCategory, firebaseAuth.currentUser!!.uid, courseID)
+                                )
+
                             // send video to firebase
                             firebaseDatabase.reference
                                 .child("courses")
@@ -257,7 +287,7 @@ class EditCourse : AppCompatActivity() {
                 // show chosen course thumbnail
                 val courseThumbnailResult: ImageView = findViewById(R.id.course_thumbnail_result)
                 courseThumbnailResult.setImageURI(courseImagePath)
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
