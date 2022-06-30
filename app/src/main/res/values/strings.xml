@@ -30,4 +30,5 @@
     <string name="nama_video_title">Nama Video</string>
     <string name="deskripsi_video_title">Deskripsi Video</string>
     <string name="link_video_title">Link Video</string>
+    <string name="edit_video_title">Edit Video</string>
 </resources>
