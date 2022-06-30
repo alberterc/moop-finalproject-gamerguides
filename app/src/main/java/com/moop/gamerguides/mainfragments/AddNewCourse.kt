@@ -241,7 +241,7 @@ class AddNewCourse : Fragment() {
                 // show chosen course thumbnail
                 val courseThumbnailResult: ImageView = view!!.findViewById(R.id.course_thumbnail_result)
                 courseThumbnailResult.setImageURI(courseImagePath)
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
