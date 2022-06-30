@@ -5,6 +5,7 @@ package com.moop.gamerguides.mainfragments
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -81,6 +82,9 @@ class UserProfile : Fragment() {
         val username: TextView = view.findViewById(R.id.user_display_name)
         val email: TextView = view.findViewById(R.id.user_email_text)
         val profilePicture: CircleImageView = view.findViewById(R.id.user_profile_picture)
+
+        // make course description view scrollable
+        bio.movementMethod = ScrollingMovementMethod()
 
         if (user != null) {
             // get data from firebase account info
