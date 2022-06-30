@@ -21,17 +21,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.moop.gamerguides.CourseDetails
+
 import com.moop.gamerguides.EditVideo
 import com.moop.gamerguides.R
 import com.moop.gamerguides.VideoDetails
 import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
-import com.moop.gamerguides.helper.GameTitleUtil
 import com.squareup.picasso.Picasso
 
-class MyVideoAdapter :
-    FirebaseRecyclerAdapter<Videos, MyVideoAdapter.ViewHolder> {
+class MyVideoAdapter : FirebaseRecyclerAdapter<Videos, MyVideoAdapter.ViewHolder> {
 
     private var courseID: String
 
