@@ -34,8 +34,12 @@
                 android:textSize="16sp"
                 android:textColor="@color/main_textcolor"
                 android:fontFamily="@font/montserrat_bold"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_toEndOf="@id/course_image"
-                android:layout_width="wrap_content"
+                android:layout_toStartOf="@id/delete_course_button"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
         />
