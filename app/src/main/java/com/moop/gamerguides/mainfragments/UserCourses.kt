@@ -68,7 +68,7 @@ class UserCourses : Fragment() {
             .child("users")
             .child(firebaseAuth.currentUser!!.uid)
             .child("courses")
-            .addListenerForSingleValueEvent(object : ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val t = object : GenericTypeIndicator<List<String>>() {}
                     if (snapshot.exists()) {
