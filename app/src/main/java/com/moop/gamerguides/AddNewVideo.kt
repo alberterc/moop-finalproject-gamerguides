@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -17,7 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.moop.gamerguides.adapter.model.Videos
 import com.moop.gamerguides.helper.FirebaseUtil
-import java.io.IOException
+import com.moop.gamerguides.helper.YouTubeUtil
 
 class AddNewVideo : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -62,7 +63,7 @@ class AddNewVideo : AppCompatActivity() {
                     videoImagePath,
                     videoTitleInput.text.toString(),
                     videoDescriptionInput.text.toString(),
-                    videoURLInput.text.toString()
+                    YouTubeUtil.getVideoId(videoURLInput.text.toString())
                 )
                 videoTitleInput.setText("")
                 videoDescriptionInput.setText("")
@@ -176,9 +177,9 @@ class AddNewVideo : AppCompatActivity() {
             try {
                 videoImagePath = fileImagePath
                 // show chosen course thumbnail
-                val courseThumbnailResult: ImageView = findViewById(R.id.video_thumbnail_result)
-                courseThumbnailResult.setImageURI(videoImagePath)
-            } catch (e: IOException) {
+                val videoThumbnailResult: ImageView = findViewById(R.id.video_thumbnail_result)
+                videoThumbnailResult.setImageURI(videoImagePath)
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
