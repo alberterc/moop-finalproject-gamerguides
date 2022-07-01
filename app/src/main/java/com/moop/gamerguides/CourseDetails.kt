@@ -184,7 +184,9 @@ class CourseDetails : AppCompatActivity() {
         }
 
         // change "Add to favorite" to "Remove from favorite"
-        checkIsFavorite(courseID, addToFavoriteButton)
+        if (firebaseAuth.currentUser!!.uid != null) {
+            checkIsFavorite(courseID, addToFavoriteButton)
+        }
 
         // check is course favorite every 250 milliseconds
         val refreshHandler = Handler()
