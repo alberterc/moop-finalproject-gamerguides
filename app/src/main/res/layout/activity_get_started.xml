@@ -17,11 +17,11 @@
 
         <ImageView
                 android:id="@+id/image"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/undraw_gaming_re_cma2"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:contentDescription="app_logo"/>
 
         <TextView
@@ -31,8 +31,8 @@
                 android:textColor="@color/main_textcolor"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat_bold"
-                android:layout_alignTop="@id/image"
-                android:layout_marginTop="200dp"
+                android:layout_below="@id/image"
+                android:layout_marginTop="80dp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
