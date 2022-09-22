@@ -92,8 +92,7 @@ Aplikasi kursus untuk para gamers yang ingin meningkatkan skillnya dalam bermain
 </p>
 
 
-
-
+All rights reserved.
 
 
 
