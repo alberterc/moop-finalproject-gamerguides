@@ -26,7 +26,7 @@
 - Alfons Ramadhany Pulle - 2440024730 - PowerPoint, Poster, Use Case, Class Diagram
 
 ## Developer Works
-- Full-stack: Albert E (vradnisntlong@gmail.com)
+- Full-stack: Albert E (albertenrico.5@gmail.com)
 - UI Design: Ahmad Sabiq (ahmadsabiqadhy@gmail.com)
 - Project Report: Daffa Haidar (daffa.h.n.zufar@gmail.com)
 - Project Documentation: Alfons Ramadhany (alfons.ramadhany22@gmail.com)
